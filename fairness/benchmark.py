@@ -3,6 +3,7 @@ import os
 import statistics
 import sys
 
+sys.path.insert(0, '../')
 from fairness import results
 from fairness.data.objects.list import DATASETS, get_dataset_names
 from fairness.data.objects.ProcessedData import ProcessedData
@@ -15,9 +16,9 @@ NUM_TRIALS_DEFAULT = 10
 
 def get_algorithm_names():
     result = [algorithm.get_name() for algorithm in ALGORITHMS]
-    print("Available algorithms:")
-    for a in result:
-        print("  %s" % a)
+    # print("Available algorithms:")
+    # for a in result:
+    #     print("  %s" % a)
     return result
 
 def run(num_trials = NUM_TRIALS_DEFAULT, dataset = get_dataset_names(),

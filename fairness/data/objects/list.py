@@ -5,6 +5,7 @@ from fairness.data.objects.German import German
 from fairness.data.objects.PropublicaRecidivism import PropublicaRecidivism
 from fairness.data.objects.PropublicaViolentRecidivism import PropublicaViolentRecidivism
 from fairness.data.objects.TwoGaussians import TwoGaussians
+from fairness.data.objects.Drug import Drug
 
 DATASETS = [
 
@@ -27,7 +28,8 @@ DATASETS = [
     Adult(),
     German(),
     PropublicaRecidivism(),
-    PropublicaViolentRecidivism()
+    PropublicaViolentRecidivism(),
+    Drug()
     ]
 
 

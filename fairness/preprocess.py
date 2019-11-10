@@ -2,6 +2,7 @@ import sys
 import os
 import pandas as pd
 import fire
+sys.path.insert(0, '../')
 from fairness.data.objects.list import DATASETS, get_dataset_names
 
 def prepare_data(dataset_names = get_dataset_names()):

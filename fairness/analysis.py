@@ -5,13 +5,14 @@ import sys
 import subprocess
 
 from ggplot import *
-
+sys.path.insert(0, '../')
 from fairness.data.objects.list import DATASETS, get_dataset_names
 from fairness.data.objects.ProcessedData import TAGS
 
 # The graphs to generate: (xaxis measure, yaxis measure)
-GRAPHS = [('DIbinary', 'accuracy'), ('sex-TPR', 'sex-calibration-')]
-
+# GRAPHS = [('DIbinary', 'accuracy'), ('sex-TPR', 'sex-calibration-')]
+GRAPHS = [('CV', 'accuracy'), ('DIbinary', 'accuracy'), ('Race-TPRDiff', 'accuracy'), 
+('Race-FPRDiff', 'accuracy'), ('Race-calibration+Diff', 'accuracy'),  ('Race-calibration-Diff', 'accuracy')]
 def run(dataset = get_dataset_names(), graphs = GRAPHS):
     for dataset_obj in DATASETS:
         if not dataset_obj.get_dataset_name() in dataset:
@@ -23,10 +24,11 @@ def run(dataset = get_dataset_names(), graphs = GRAPHS):
                 print("    type:" + tag)
                 filename = dataset_obj.get_results_filename(sensitive, tag)
                 make_all_graphs(filename, graphs)
+    '''
     print("Generating additional figures in R...")
     subprocess.run(["Rscript",
-                    "results/generate-report.R"])
-
+                   "results/generate-report.R"])
+    '''
 def make_all_graphs(filename, graphs):
     try:
        f = pd.read_csv(filename)
@@ -85,7 +87,8 @@ def generate_graph(f, xaxis_measure, yaxis_measure, title):
         p = (ggplot(f, aes(x=xaxis_measure, y=yaxis_measure, colour='algorithm')) +
              geom_point(size=50) + ggtitle(title) + scale)
         print(xaxis_measure, yaxis_measure)
-        p.save('results/analysis/%s/%s-%s.png' % (title, xaxis_measure, yaxis_measure),
+        file_name = 'results/analysis/%s/%s-%s.png' % (title, xaxis_measure, yaxis_measure)
+        p.save(file_name,
                width=20,
                height=6)
 

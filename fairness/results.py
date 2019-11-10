@@ -8,7 +8,7 @@ from fairness.metrics.list import get_metrics
 # FIXME: this could probably be handled better on Windows
 def local_results_path():
     home = pathlib.Path.home()
-    path = home / '.fairness'
+    path = home / 'cs/fair_repr'
     ensure_dir(path)
     return path
 
